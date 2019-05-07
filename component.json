@@ -1,0 +1,107 @@
+{
+    "title": "Computer Vision Client",
+    "description": "The Computer Vision API provides state-of-the-art algorithms to process images and return information. For example, it can be used to determine if an image contains mature content, or it can be used to find all the faces in an image.  It also has other features like estimating dominant and accent colors, categorizing the content of images, and describing an image with complete English sentences.  Additionally, it can also intelligently generate images thumbnails for displaying large images effectively.",
+    "docsUrl": "",
+    "url": "https://api.apis.guru/v2/specs/microsoft.com/cognitiveservices-Ocr/2.0/swagger.json",
+    "envVars": {},
+    "credentials": {
+        "fields": {
+            "server": {
+                "label": "Server",
+                "viewClass": "SelectView",
+                "model": [
+                    "https://westcentralus.api.cognitive.microsoft.com/vision/v2.0",
+                    "{Endpoint}",
+                    "--- Custom URL"
+                ],
+                "required": true
+            },
+            "otherServer": {
+                "label": "Custom Server URL",
+                "viewClass": "TextFieldView"
+            },
+            "apim_key": {
+                "label": "Ocp-Apim-Subscription-Key (apim_key)",
+                "viewClass": "TextFieldView"
+            }
+        }
+    },
+    "triggers": {
+        "startFlow": {
+            "main": "./lib/triggers/startFlow.js",
+            "type": "polling",
+            "title": "Start Flow",
+            "fields": {}
+        }
+    },
+    "actions": {
+        "BatchReadFile": {
+            "main": "./lib/actions/BatchReadFile.js",
+            "title": "Use this interface to get the result of a Read operation, employing the state-of-the-art Optical Character Recognition (OCR) algorithms optimized for text-heavy documents. When you use the Read File interface, the response contains a field called \"Operation-Location\". The \"Operation-Location\" field contains the URL that you must use for your \"Read Operation Result\" operation to access OCR results. ",
+            "description": "Use this interface to get the result of a Read operation, employing the state-of-the-art Optical Character Recognition (OCR) algorithms optimized for text-heavy documents. When you use the Read File interface, the response contains a field called \"Operation-Location\". The \"Operation-Location\" field contains the URL that you must use for your \"Read Operation Result\" operation to access OCR results. ",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/BatchReadFile.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "GetReadOperationResult": {
+            "main": "./lib/actions/GetReadOperationResult.js",
+            "title": "This interface is used for getting OCR results of Read operation. The URL to this interface should be retrieved from \"Operation-Location\" field returned from Batch Read File interface.",
+            "description": "This interface is used for getting OCR results of Read operation. The URL to this interface should be retrieved from \"Operation-Location\" field returned from Batch Read File interface.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/GetReadOperationResult.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "RecognizeText": {
+            "main": "./lib/actions/RecognizeText.js",
+            "title": "Recognize Text operation. When you use the Recognize Text interface, the response contains a field called 'Operation-Location'. The 'Operation-Location' field contains the URL that you must use for your Get Recognize Text Operation Result operation.",
+            "description": "Recognize Text operation. When you use the Recognize Text interface, the response contains a field called 'Operation-Location'. The 'Operation-Location' field contains the URL that you must use for your Get Recognize Text Operation Result operation.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/RecognizeText.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "GetTextOperationResult": {
+            "main": "./lib/actions/GetTextOperationResult.js",
+            "title": "This interface is used for getting text operation result. The URL to this interface should be retrieved from 'Operation-Location' field returned from Recognize Text interface.",
+            "description": "This interface is used for getting text operation result. The URL to this interface should be retrieved from 'Operation-Location' field returned from Recognize Text interface.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/GetTextOperationResult.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        }
+    }
+}
